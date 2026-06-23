@@ -1,13 +1,13 @@
-# 🤖 CrashHelper Mobile: Assistente Multiagente
+# CrashHelper Mobile: Assistente Multiagente
 
 Um sistema inteligente que demonstra a integração prática de arquitetura multiagente (CrewAI), RAG (Retrieval-Augmented Generation), embeddings vetoriais, protocolo MCP e modelos de linguagem locais para triagem e resolução automatizada de crashes em aplicativos mobile.
 
-## 👥 Integrantes
+## Integrantes
 - Júlio Caetano Vieira dos Santos
 
 ---
 
-## 🏆 Objetivos Alcançados (Checklist do Projeto)
+## Objetivos Alcançados (Checklist do Projeto)
 - **Arquitetura Multiagente**: 2 agentes especializados (Analista de Diagnóstico e Engenheiro de Correção) operando em fluxo sequencial.
 - **RAG com Embeddings**: ChromaDB com embeddings `nomic-embed-text` locais para busca semântica na documentação.
 - **Modelos Locais**: Integração 100% local com Ollama executando o modelo **LLaMA 3.2**.
@@ -17,7 +17,7 @@ Um sistema inteligente que demonstra a integração prática de arquitetura mult
 
 ---
 
-## 🏗️ Arquitetura do Sistema
+## Arquitetura do Sistema
 
     ┌─────────────────────────────────────────────────────────────┐
     │                        main.py (CLI)                        │
@@ -48,7 +48,7 @@ Um sistema inteligente que demonstra a integração prática de arquitetura mult
 
 ---
 
-## 🧩 Componentes Principais
+## Componentes Principais
 
 ### Agentes LLM (`agents.py` & `tasks.py`)
 - **AnalistaAgent**: Recebe o log de crash, consulta a base de conhecimento RAG e formula o diagnóstico técnico estruturado.
@@ -66,7 +66,7 @@ Um sistema inteligente que demonstra a integração prática de arquitetura mult
 
 ---
 
-## 💻 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 - **CrewAI**: Orquestração multiagente.
 - **Ollama**: Execução local de modelos (`llama3.2` e `nomic-embed-text`).
 - **LangChain / ChromaDB**: Pipeline de Embeddings e RAG.
@@ -76,7 +76,7 @@ Um sistema inteligente que demonstra a integração prática de arquitetura mult
 
 ---
 
-## 🚀 Instalação e Execução
+## Instalação e Execução
 
 ### 1. Pré-requisitos
 * Python 3.11+
@@ -120,7 +120,7 @@ Inicia o servidor de protocolo de contexto.
 
 ---
 
-## ⚠️ Limitações Conhecidas
+## Limitações Conhecidas
 
 O sistema foi desenvolvido e validado com o modelo **LLaMA 3.2**, focado em execução 100% local e fluida em hardware padrão. Isso garante que o projeto seja testável em qualquer máquina sem depender de APIs pagas ou clusters de GPU. Devido à natureza enxuta de modelos menores, as seguintes características são esperadas:
 

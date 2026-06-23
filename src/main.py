@@ -114,11 +114,11 @@ def analisar(
         git_output = GitAnalyzerTool()._run(repo_path=repo_path_str, n_commits=3)
     except Exception as e:
         git_output = f"[Histórico Git indisponível: {e}]"
-    typer.echo("✔  Histórico coletado.")
+    typer.echo("Histórico coletado.")
 
     typer.echo("Mapeando arquivos do repositório...")
     lista_arquivos = _listar_arquivos_repo(repo_path_str)
-    typer.echo("✔  Mapeamento concluído.\n")
+    typer.echo("Mapeamento concluído.\n")
 
     typer.echo("Inicializando agentes...\n")
     analista   = criar_analista()

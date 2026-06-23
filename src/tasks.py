@@ -51,13 +51,13 @@ def criar_tarefa_correcao(
         ),
         expected_output=(
             "Relatório técnico completo em Português do Brasil contendo EXATAMENTE estas seções:\n\n"
-            "## 📁 Contexto do Repositório\n"
-            "## 🔎 Arquivo Analisado\n"
-            "## 💥 Causa Técnica Detalhada\n"
-            "## ✅ Código Corrigido\n"
-            "## 💡 Explicação das Alterações\n"
-            "## 🧪 Testes Recomendados\n"
-            "## 📚 Boas Práticas"
+            "## Contexto do Repositório\n"
+            "## Arquivo Analisado\n"
+            "## Causa Técnica Detalhada\n"
+            "## Código Corrigido\n"
+            "## Explicação das Alterações\n"
+            "## Testes Recomendados\n"
+            "## Boas Práticas"
         ),
         agent=engenheiro,
         context=[],
