@@ -1,0 +1,22 @@
+# Ambientes Virtuais
+venv/
+env/
+.env
+
+# Cache e Arquivos Compilados do Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Banco de Dados Vetorial (RAG)
+chroma_db/
+
+# Relatórios (Opcional: se quiser enviar os de teste, remova esta linha)
+# reports/*.md
+
+# Configurações de IDE e SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

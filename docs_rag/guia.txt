@@ -1,0 +1,4 @@
+Erro: RenderFlex overflowed
+Plataforma: Flutter
+Causa Comum: Um widget Column ou Row possui componentes filhos que excedem o limite de espaço disponível na tela.
+Solução Recomendada: Envolver o widget que está estourando o limite com um widget `Expanded` ou `Flexible`, ou trocar a estrutura principal por um `SingleChildScrollView` para permitir a rolagem da tela.
