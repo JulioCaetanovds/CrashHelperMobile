@@ -24,10 +24,10 @@ Um sistema inteligente que demonstra a integração prática de arquitetura mult
     │          Typer · pré-execução Git · scan de arquivos        │
     └────────────────────────┬────────────────────────────────────┘
                              │ kickoff()
-                             │ kickoff()
+                             │
                   ┌──────────▼──────────┐
-                  │   CrewAI (Sequential)│
-                  │   CrewAI (Sequential)│
+                  │  CrewAI (Sequential)│
+                  │                     │
                   └──────────┬──────────┘
                              │
               ┌──────────────▼──────────────┐
@@ -36,7 +36,7 @@ Um sistema inteligente que demonstra a integração prática de arquitetura mult
               │    Saída: Diagnóstico       │
               └──────────────┬──────────────┘
                              │ context
-                             │ context
+                             │
               ┌──────────────▼──────────────┐
               │ 2. AGENTE ENGENHEIRO        │
               │    Tool: LerArquivoLocal    │
