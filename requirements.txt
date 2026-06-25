@@ -1,0 +1,11 @@
+crewai
+crewai-tools
+langchain-community
+langchain-text-splitters
+chromadb
+gitpython
+typer
+ollama
+pypdf
+mcp
+fastmcp
