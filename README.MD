@@ -24,7 +24,9 @@ Um sistema inteligente que demonstra a integração prática de arquitetura mult
     │          Typer · pré-execução Git · scan de arquivos        │
     └────────────────────────┬────────────────────────────────────┘
                              │ kickoff()
+                             │ kickoff()
                   ┌──────────▼──────────┐
+                  │   CrewAI (Sequential)│
                   │   CrewAI (Sequential)│
                   └──────────┬──────────┘
                              │
@@ -33,6 +35,7 @@ Um sistema inteligente que demonstra a integração prática de arquitetura mult
               │    Tool: RAG (ChromaDB)     │
               │    Saída: Diagnóstico       │
               └──────────────┬──────────────┘
+                             │ context
                              │ context
               ┌──────────────▼──────────────┐
               │ 2. AGENTE ENGENHEIRO        │
@@ -111,14 +114,14 @@ Gera o banco vetorial a partir da pasta `docs_rag/`.
 **Passo B: Preparar a Cobaia e Executar a Análise de Crash**
 Como o sistema usa a biblioteca GitPython para ler os últimos commits e fornecer contexto ao modelo, precisamos simular um repositório na pasta cobaia antes de iniciar:
 
-    # 1. Entre na pasta da cobaia e inicie o repositório
+    # 1. Abra um novo terminal entre na pasta da cobaia e inicie o repositório
     cd app_cobaia
     git init
     git add .
     git commit -m "init: projeto cobaia para analise"
     cd ..
     
-    # 2. Execute a análise multiagente
+    # 2. Volte para o terminal que esta (venv) e execute a análise multiagente
     python src/main.py analisar error_log.txt --repo "app_cobaia" --verbose
 
 **Passo C: Testar o Servidor MCP**

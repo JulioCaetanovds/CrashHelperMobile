@@ -5,21 +5,19 @@ def criar_tarefa_diagnostico(analista: Agent, conteudo_log: str) -> Task:
         description=(
             "Analise o seguinte log de crash:\n\n"
             f"```\n{conteudo_log}\n```\n\n"
-            "Passos:\n"
-            "1. Identifique a exceção, a plataforma e o componente de origem.\n"
-            "2. Faça UMA ÚNICA chamada à ferramenta de base de conhecimento para buscar contexto.\n"
-            "   ATENÇÃO PARA O FORMATO DA FERRAMENTA: O Action Input DEVE ser estritamente um JSON plano apenas com a chave 'query'. Exemplo exato: {\"query\": \"RenderFlex overflowed\"}\n"
-            "   Após receber a Observation, vá direto para o Final Answer. Não repita a chamada.\n"
-            "3. Escreva o diagnóstico estruturado."
+            "Passos OBRIGATÓRIOS:\n"
+            "1. Chame a ferramenta de base de conhecimento UMA VEZ usando o formato JSON estrito: {\"query\": \"RenderFlex overflowed\"}\n"
+            "2. Após a resposta da ferramenta, NÃO chame mais nada.\n"
+            "3. Gere o diagnóstico FINAL."
         ),
         expected_output=(
-            "Diagnóstico em Português do Brasil com:\n"
-            "- **Tipo do Erro**\n"
-            "- **Plataforma**\n"
-            "- **Componente Afetado**\n"
-            "- **Causa Raiz**\n"
-            "- **Contexto da Base de Conhecimento**\n"
-            "- **Severidade**: Crítica / Alta / Média / Baixa"
+            "Obrigatório retornar EXATAMENTE neste formato Markdown com quebras de linha:\n\n"
+            "**Tipo do Erro**: [Preencher]\n"
+            "**Plataforma**: [Preencher]\n"
+            "**Componente Afetado**: [Preencher]\n"
+            "**Causa Raiz**: [Preencher]\n"
+            "**Contexto da Base de Conhecimento**: [Preencher]\n"
+            "**Severidade**: [Alta/Média/Baixa]"
         ),
         agent=analista,
     )
@@ -32,32 +30,30 @@ def criar_tarefa_correcao(
 ) -> Task:
     return Task(
         description=(
-            "Você recebeu o diagnóstico do Analista sobre um crash Flutter.\n\n"
-
-            "## Histórico Git (já coletado — NÃO chame nenhuma ferramenta Git)\n\n"
-            f"{git_output}\n\n"
-            "---\n\n"
-
-            "## Arquivos de código existentes no repositório\n\n"
-            "ESTES SÃO OS ÚNICOS ARQUIVOS QUE EXISTEM. Qualquer outro caminho retornará ERRO.\n\n"
-            f"{lista_arquivos}\n\n"
-            "---\n\n"
-
-            "## SUA ÚNICA AÇÃO OBRIGATÓRIA\n\n"
-            "1. Com base no diagnóstico e no histórico Git, escolha UM arquivo da lista acima.\n"
-            "2. Chame 'Ler Arquivo Local' UMA VEZ com o caminho relativo exatamente como está na lista.\n"
-            "3. Ao receber a resposta da ferramenta com o código-fonte, NÃO chame ferramentas novamente.\n"
-            "4. GERE IMEDIATAMENTE O RELATÓRIO FINAL usando OBRIGATORIAMENTE as seções solicitadas."
+            "Você recebeu o diagnóstico de um crash Flutter.\n\n"
+            f"Histórico Git:\n{git_output}\n\n"
+            f"Arquivos no repositório:\n{lista_arquivos}\n\n"
+            "Ações OBRIGATÓRIAS:\n"
+            "1. Chame a ferramenta 'ler_arquivo_local' passando UM arquivo da lista acima.\n"
+            "2. Ao receber o código do arquivo, GERE O RELATÓRIO FINAL imediatamente.\n"
+            "3. É PROIBIDO inventar caminhos ou chamar a ferramenta mais de uma vez."
         ),
         expected_output=(
-            "Relatório técnico completo em Português do Brasil contendo EXATAMENTE estas seções:\n\n"
+            "Obrigatório retornar EXATAMENTE nestas seções Markdown:\n\n"
             "## Contexto do Repositório\n"
+            "[Escreva aqui]\n\n"
             "## Arquivo Analisado\n"
+            "[Escreva aqui]\n\n"
             "## Causa Técnica Detalhada\n"
+            "[Escreva aqui]\n\n"
             "## Código Corrigido\n"
+            "[Escreva aqui]\n\n"
             "## Explicação das Alterações\n"
+            "[Escreva aqui]\n\n"
             "## Testes Recomendados\n"
-            "## Boas Práticas"
+            "[Escreva aqui]\n\n"
+            "## Boas Práticas\n"
+            "[Escreva aqui]"
         ),
         agent=engenheiro,
         context=[],
