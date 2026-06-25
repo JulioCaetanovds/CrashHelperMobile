@@ -23,9 +23,9 @@ Um sistema inteligente que demonstra a integração prática de arquitetura mult
     │                        main.py (CLI)                        │
     │          Typer · pré-execução Git · scan de arquivos        │
     └────────────────────────┬────────────────────────────────────┘
-                             │
+                             │ kickoff()
                   ┌──────────▼──────────┐
-                  │ CrewAI (Sequential) │
+                  │   CrewAI (Sequential)│
                   └──────────┬──────────┘
                              │
               ┌──────────────▼──────────────┐
@@ -33,7 +33,7 @@ Um sistema inteligente que demonstra a integração prática de arquitetura mult
               │    Tool: RAG (ChromaDB)     │
               │    Saída: Diagnóstico       │
               └──────────────┬──────────────┘
-                             │
+                             │ context
               ┌──────────────▼──────────────┐
               │ 2. AGENTE ENGENHEIRO        │
               │    Tool: LerArquivoLocal    │
@@ -88,7 +88,7 @@ Configuração do Ollama no terminal:
     ollama pull llama3.2
     ollama pull nomic-embed-text
     
-    # Iniciar o servidor (geralmente em localhost:11434)
+    # Iniciar o servidor apenas se o OLLAMA não estiver aberto(geralmente em localhost:11434)
     ollama serve
 
 ### 2. Configuração do Projeto
@@ -108,15 +108,25 @@ Gera o banco vetorial a partir da pasta `docs_rag/`.
 
     python src/main.py indexar
 
-**Passo B: Executar a Análise de Crash**
-Gera o relatório interagindo com o projeto cobaia.
+**Passo B: Preparar a Cobaia e Executar a Análise de Crash**
+Como o sistema usa a biblioteca GitPython para ler os últimos commits e fornecer contexto ao modelo, precisamos simular um repositório na pasta cobaia antes de iniciar:
 
+    # 1. Entre na pasta da cobaia e inicie o repositório
+    cd app_cobaia
+    git init
+    git add .
+    git commit -m "init: projeto cobaia para analise"
+    cd ..
+    
+    # 2. Execute a análise multiagente
     python src/main.py analisar error_log.txt --repo "app_cobaia" --verbose
 
 **Passo C: Testar o Servidor MCP**
 Inicia o servidor de protocolo de contexto.
 
     python src/main.py servidor
+
+*(Todos os relatórios gerados são salvos automaticamente na pasta `reports/`)*
 
 ---
 
@@ -128,5 +138,3 @@ O sistema foi desenvolvido e validado com o modelo **LLaMA 3.2**, focado em exec
 - **Foco da Ferramenta**: O relatório deve ser interpretado como um **guia de diagnóstico e orientação técnica** avançada para o desenvolvedor, e não como um patch de código infalível para copiar e colar.
 
 A arquitetura do sistema (Agentes, RAG, FastMCP) é agnóstica. Se a exata mesma infraestrutura for conectada a um modelo de maior densidade (como o LLaMA 3.1 70B ou Qwen 2.5 Coder 32B), a saída do código será estruturalmente perfeita e pronta para produção.
-
-*(Todos os relatórios gerados são salvos automaticamente na pasta `reports/`)*
